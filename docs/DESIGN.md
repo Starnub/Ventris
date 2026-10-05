@@ -1,4 +1,4 @@
-# Ventris — Design Plan (draft 8)
+# Ventris — Design Plan (draft 9)
 
 > Working title. Idle tower defense where **you are the tower**, an abstract shape in a pitch-black void.
 > It levels up for good: no prestige, no resets, no upkeep. Every piece of gear you equip shows up on the shape.
@@ -35,7 +35,8 @@
 | **Form** | Your body's shape (point, line, polygon, polyhedron). It decides your attack. |
 | **Dot / Laser / Pulse / Clone** | The four attacks: 0D, 1D, 2D, 3D |
 | **Vertex / Weave / Shell / Cell** | The four gear slots: corners, edges, faces, interior |
-| **Plate** | A face acting as a shield on that side of you. Breaks and regrows. |
+| **Plate** | A face acting as a shield on that side of you. Breaks and regrows; the shape's rotation can turn a broken one toward the enemies. |
+| **Facade** | Shell trait: all faces merge into one big shield facing the enemies, with one shared health pool |
 | **Integrity** | Your HP. Breaching it pushes you back up a few Depths; you never lose anything. |
 | **Trait** | The one visual + attack effect an item has (e.g. Dotted, Comet) |
 | **Harmonics** | Late unlock that lets a slot run 2–3 traits at once |
@@ -72,6 +73,12 @@
  hours    │ Push Depth, finish sets, unlock Forms, fill Codex pages
  days+    │ Ascend a dimension, perfect sets, enshrine in the Archive
 ```
+
+### The battlefield
+- **Enemies all come from one direction** (decided). Assumed layout: your shape sits low on the portrait screen and enemies come down from the top.
+- **Your shape is always rotating slowly** (decided). That rotation matters for defense (§4.2 Shell).
+- Enemies hurt you two ways: **shots** (projectiles) and **contact** (ramming into you).
+- *To check later:* attacks that spread in every direction (the 2D Pulse, the π Constant) waste the half that faces away from the enemies.
 
 ### Depth (the farm)
 - Depth is one number from 1 to ∞. Enemy HP, damage, and count grow exponentially with it.
@@ -155,19 +162,21 @@ Each item has **one trait.** It shows on your body and changes whichever attack 
 
 **Shell (faces) = defense.** Vertex and Weave shape your attack. Shell shapes **how you take hits.**
 
-**Base rule: faces are shield plates.** Each face blocks hits coming from its side. When enough damage gets through, the plate breaks and only then does damage reach your Integrity (your HP). Broken plates regrow on their own (no upkeep). Your Form changes how this plays: a tetrahedron has 4 big plates, an icosahedron has 20 small ones.
+**Base rule: faces are shield plates, and the shape is always turning.** Each face blocks hits on its side. A face that takes too much breaks and regrows on its own (no upkeep). Because the shape slowly rotates, **a broken face eventually turns to face the enemies and leaves a gap that lets shots through** to your Integrity (HP). Your Form matters: a tetrahedron has 4 big faces, an icosahedron has 20 small ones.
 
-**Traits** *(proposed)*. Faces are clear glass by default. Each trait changes a different property of the glass, so all three can stack (Harmonics).
+**Traits.** Each trait changes a different property of the faces, so all three can stack (Harmonics).
 
-| Trait | Property | Body | Effect |
-|---|---|---|---|
-| **Exploded** | Position | Faces float out from the body with **visible gaps** between them | **Trades defense for attack.** Hits can slip through the gaps straight to Integrity. Your attacks pass through the floating faces as **lenses** and focus to a bright, visible focal point that hits hard. |
-| **Vessel** | Fill | Every face holds glowing liquid filled to **one shared waterline** that cuts straight across the whole shape. It stays level as the shape turns, and tilts with the phone's gyroscope. | **All plates share one health pool** (communicating vessels: connected containers always settle at the same level). A hit on any face ripples the surface and drops the waterline on every face at once. When it runs dry, every plate drops together; then they refill together. |
-| **Stained** | Color | Faces gradually become stained glass | Each plate **takes on the color of the last thing that hit it** and resists that color from then on. You can see which side gets hit by what. |
+| Trait | Property | Body | Effect | Status |
+|---|---|---|---|---|
+| **Facade** | Arrangement | All the faces **merge into one large face** that stays pointed at the enemies while the shape turns behind it | **One shield, one shared health pool.** Rotation can no longer expose gaps, but when the Facade breaks, everything is open until it regrows. | Confirmed |
+| **Mirror** | Surface | The face gets a silver, reflective finish | Enemy **shots bounce straight back** along the path they came in on, at whoever fired them | Proposed |
+| **Amber** | Consistency | The face turns thick and resin-like | Enemies that **ram** the face **get stuck in it**, frozen in place and visible inside the glass like insects in amber, where your attacks can pick them off. When the face breaks, everything stuck in it is released at once. | Proposed |
 
-All three together: stained-glass lenses floating around you, all filled to the same waterline. Interplay happens without extra rules: with Exploded, the waterline stays level across lenses that are physically apart, which shows they're still one pool. Vessel mirrors the Constant **1** (enemies share one pool); here it's your own faces. **Stained lenses do not tint attacks** (decided).
+**Why these stack:** each one handles a different thing. Facade decides *where* the faces are, Mirror handles *shots*, and Amber handles *rammers*. All three together: one silver slab in front of you that sends shots back and traps whatever charges into it.
 
-Dropped: **Absorb** (fill with light, then flash), **Crackle** (crack lines get too busy on 12–20 faces), **Heartbeat** (rhythmic shove), **Phase** (fade-in/out dodge), **Mirror** (an opaque, reflective finish can't double as a see-through lens), Hollow (hides other face traits), Dense (hides the Cell fractal), Prism (attack-only).
+Alternatives if one doesn't land: **Refract** (shots bend as they pass through the glass and veer away from your core) instead of Mirror; **Elastic** (the face dents inward on impact and springs back, flinging rammers away) instead of Amber.
+
+Dropped: **Exploded** (not unique enough), **Stained** (a single merged face constantly changing color doesn't work), **Vessel** (didn't change a property of the face itself), **Absorb**, **Crackle** (too busy on 12–20 faces), **Heartbeat**, **Phase**, Hollow, Dense, Prism.
 
 **Cell (interior, 3D+):** a fractal lives inside the glass body. **Leveling the item adds recursion depth**, so it visibly gains detail.
 - Menger sponge, Sierpiński tetrahedron, Koch snowflake slices, a Julia set cross-section, and so on.
@@ -192,7 +201,7 @@ The three Vertex traits don't conflict: a corner can glint, leave a trail, and p
 - The slot starts with **1 socket**. The *Harmonics* track (fed by item stars and a Lattice region) unlocks a **2nd and 3rd socket**.
 - Each extra socket holds the trait of another item you own for that slot. Only the main item's affixes count.
 - **No combo effects.** Each trait does exactly what it does alone, and all three just run together.
-- **Weave gets the same treatment** (Dotted, Double, and Wavy use separate axes). **Shell gets it too:** Exploded, Crackle, and Stained use separate properties (§4.2).
+- **Weave gets the same treatment** (Dotted, Double, and Wavy use separate axes). **Shell gets it too:** Facade, Mirror, and Amber each handle a different thing (§4.2).
 
 ### 4.4 Rarity: number sets
 **Integer → Rational → Irrational → Transcendental → Imaginary → Complex**
@@ -248,7 +257,6 @@ These replace the usual physical/magic split.
 - **Build tension:**
   - A **pure** single-color build gets a big *Purity* multiplier but gets walled by enemies of that color.
   - An even **white** build is never walled but is mediocre everywhere.
-  - **Stained** Shell plates pick up resistance to whatever color keeps hitting them.
 - The colors are **pure damage types**, with no status effects attached.
 
 ---
@@ -463,7 +471,7 @@ Every enemy is a **shape × color** combination. The shape decides how it behave
 ---
 
 ## 15. Open questions / agenda
-1. **Shell:** Exploded and Stained confirmed. Third trait: shared HP confirmed, shown as **Vessel** (proposed visual, §4.2).
+1. **Shell:** Facade confirmed. Mirror + Amber proposed (§4.2).
 2. **Collections:** the Synergy Codex is gone, but you want a collection system for *something*. What should be collected? Still open.
 3. **Cell fractals:** the list, and what each one does. Next after Shell.
 4. **Sets:** 2- and 4-piece bonuses that change how something works, not +X%.
