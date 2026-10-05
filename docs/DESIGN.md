@@ -138,7 +138,7 @@ Each item has **one trait.** It shows on your body and changes whichever attack 
 - Because the fractal sits inside the shape, it doesn't add visual clutter. You see it through the glass faces, and Hollow vs Dense Shell changes how visible it is, which gives a small free combo.
 
 ### 4.3 Vertex: open problem
-Draft-3 ideas (truncate, round, node) don't work: **fine changes to corner geometry are unreadable on a 3D shape with 12–20 small corners.** Stellate is the exception because spikes change the silhouette.
+The first ideas (truncate, round, node) don't work: **fine changes to corner geometry are unreadable on a 3D shape with 12–20 small corners.** Stellate is the exception because spikes change the silhouette.
 
 **Rule for Vertex effects:** they must read through **silhouette, light, size, or motion**, not through fine detail.
 
