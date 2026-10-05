@@ -164,19 +164,26 @@ Each item has **one trait.** It shows on your body and changes whichever attack 
 
 **Base rule: faces are shield plates, and the shape is always turning.** Each face blocks hits on its side. A face that takes too much breaks and regrows on its own (no upkeep). Because the shape slowly rotates, **a broken face eventually turns to face the enemies and leaves a gap that lets shots through** to your Integrity (HP). Your Form matters: a tetrahedron has 4 big faces, an icosahedron has 20 small ones.
 
-**Traits.** Each trait changes a different property of the faces, so all three can stack (Harmonics).
+**Rules a face trait must pass** (learned the hard way):
+1. **Stays see-through.** The Cell fractal has to remain visible, so nothing opaque, filled, or mirrored.
+2. **Geometric, glass, or light themed.** Nothing organic (no resin, liquid, or rubber).
+3. **Simple and readable on 20 faces *and* on one merged Facade.** No fine detail such as cracks.
+4. **Changes a real property of the face**, and that property differs from the other two traits so they can stack.
+5. **Defensive, and not a plain number tweak.** No rhythmic shoves, no fade-in/out dodging.
+
+**Traits:**
 
 | Trait | Property | Body | Effect | Status |
 |---|---|---|---|---|
-| **Facade** | Arrangement | All the faces **merge into one large face** that stays pointed at the enemies while the shape turns behind it | **One shield, one shared health pool.** Rotation can no longer expose gaps, but when the Facade breaks, everything is open until it regrows. | Confirmed |
-| **Mirror** | Surface | The face gets a silver, reflective finish | Enemy **shots bounce straight back** along the path they came in on, at whoever fired them | Proposed |
-| **Amber** | Consistency | The face turns thick and resin-like | Enemies that **ram** the face **get stuck in it**, frozen in place and visible inside the glass like insects in amber, where your attacks can pick them off. When the face breaks, everything stuck in it is released at once. | Proposed |
+| **Facade** | Arrangement | All the faces **merge into one large face** that stays pointed at the enemies while the shape turns behind it | **One shield, one shared health pool.** Rotation can't expose gaps anymore, but when the Facade breaks, everything is open until it regrows. | Confirmed |
+| **Refract** | Bending | Clear glass that visibly bends whatever is behind it, including the fractal | Enemy shots **pass through the face and bend away** from your core, so the face isn't worn down by them. As with real glass, a shot that hits **dead-on doesn't bend** and goes straight through to you. | Proposed |
+| **Prism** | Splitting | Rainbow fringes along the face's edges | Each enemy shot **splits into a red, a green, and a blue ray** that fan apart. Each ray carries a third of the hit and is checked against your resistance to its own color (§5). The wide rays tend to miss. | Proposed |
 
-**Why these stack:** each one handles a different thing. Facade decides *where* the faces are, Mirror handles *shots*, and Amber handles *rammers*. All three together: one silver slab in front of you that sends shots back and traps whatever charges into it.
+Refract and Prism combine the way a real prism does: shots get bent *and* split.
 
-Alternatives if one doesn't land: **Refract** (shots bend as they pass through the glass and veer away from your core) instead of Mirror; **Elastic** (the face dents inward on impact and springs back, flinging rammers away) instead of Amber.
+Backup: **Trap** (total internal reflection): shots that enter the face get caught inside the glass, bouncing around as visible light streaks until they fade. Each face can only hold so many at once.
 
-Dropped: **Exploded** (not unique enough), **Stained** (a single merged face constantly changing color doesn't work), **Vessel** (didn't change a property of the face itself), **Absorb**, **Crackle** (too busy on 12–20 faces), **Heartbeat**, **Phase**, Hollow, Dense, Prism.
+Dropped: **Mirror** (opaque, hides the fractal), **Amber** and **Elastic** (too organic), **Exploded** (not unique enough), **Stained** (a single merged face constantly changing color doesn't work), **Vessel** (didn't change a property of the face itself), **Absorb**, **Crackle** (too busy on 12–20 faces), **Heartbeat**, **Phase**, Hollow, Dense, Prism.
 
 **Cell (interior, 3D+):** a fractal lives inside the glass body. **Leveling the item adds recursion depth**, so it visibly gains detail.
 - Menger sponge, Sierpiński tetrahedron, Koch snowflake slices, a Julia set cross-section, and so on.
@@ -201,7 +208,7 @@ The three Vertex traits don't conflict: a corner can glint, leave a trail, and p
 - The slot starts with **1 socket**. The *Harmonics* track (fed by item stars and a Lattice region) unlocks a **2nd and 3rd socket**.
 - Each extra socket holds the trait of another item you own for that slot. Only the main item's affixes count.
 - **No combo effects.** Each trait does exactly what it does alone, and all three just run together.
-- **Weave gets the same treatment** (Dotted, Double, and Wavy use separate axes). **Shell gets it too:** Facade, Mirror, and Amber each handle a different thing (§4.2).
+- **Weave gets the same treatment** (Dotted, Double, and Wavy use separate axes). **Shell gets it too:** Facade, Refract, and Prism each change a different property (§4.2).
 
 ### 4.4 Rarity: number sets
 **Integer → Rational → Irrational → Transcendental → Imaginary → Complex**
@@ -471,7 +478,7 @@ Every enemy is a **shape × color** combination. The shape decides how it behave
 ---
 
 ## 15. Open questions / agenda
-1. **Shell:** Facade confirmed. Mirror + Amber proposed (§4.2).
+1. **Shell:** Facade confirmed. Refract + Prism proposed (§4.2).
 2. **Collections:** the Synergy Codex is gone, but you want a collection system for *something*. What should be collected? Still open.
 3. **Cell fractals:** the list, and what each one does. Next after Shell.
 4. **Sets:** 2- and 4-piece bonuses that change how something works, not +X%.
