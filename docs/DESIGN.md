@@ -1,4 +1,4 @@
-# Ventris — Design Plan (draft 7)
+# Ventris — Design Plan (draft 8)
 
 > Working title. Idle tower defense where **you are the tower**, an abstract shape in a pitch-black void.
 > It levels up for good: no prestige, no resets, no upkeep. Every piece of gear you equip shows up on the shape.
@@ -31,10 +31,12 @@
 |---|---|
 | **Depth** | How deep into the void you're farming. One number, keeps going up. |
 | **Layer** | Every 10 Depth: a new zone with its own enemy mix and color theme |
-| **Threshold** | Every 100 Depth: a boss fight. Bosses guard Constants. |
+| **Threshold** | Every 100 Depth: a boss fight. Bosses guard Constants (confirmed). |
 | **Form** | Your body's shape (point, line, polygon, polyhedron). It decides your attack. |
 | **Dot / Laser / Pulse / Clone** | The four attacks: 0D, 1D, 2D, 3D |
 | **Vertex / Weave / Shell / Cell** | The four gear slots: corners, edges, faces, interior |
+| **Plate** | A face acting as a shield on that side of you. Breaks and regrows. |
+| **Integrity** | Your HP. Breaching it pushes you back up a few Depths; you never lose anything. |
 | **Trait** | The one visual + attack effect an item has (e.g. Dotted, Comet) |
 | **Harmonics** | Late unlock that lets a slot run 2–3 traits at once |
 | **Constant** | A relic that rewrites a combat rule (π, e, i, 1, 0) |
@@ -151,17 +153,32 @@ Each item has **one trait.** It shows on your body and changes whichever attack 
 | **Double**: twin | Double-stroked edges | Two parallel dots | Two parallel beams | Two nested pulses | A smaller clone nested inside |
 | **Wavy**: wider sweep | Edges ripple as sine waves | The dot snakes along a sine path | The beam oscillates side to side, covering a wider band | The ring's edge ripples outward | Clone edges ripple, larger area |
 
-**Shell (faces):** *(proposed)* Faces are clear glass by default. Each trait changes one property of that glass: **Prism** changes how it **bends light**, **Crackle** changes its **surface**, and **Exploded** changes its **position**. All three can stack: floating, cracked, rainbow-edged panels, with the fractal still visible inside.
+**Shell (faces) = defense.** Vertex and Weave shape your attack. Shell shapes **how you take hits.**
 
-| Item | Body | Dot | Laser | Pulse | Clone |
-|---|---|---|---|---|---|
-| **Prism**: split into R/G/B | Faces throw rainbow dispersion at their edges | Splits into three colored dots that fan apart | Splits into three fanned colored beams | Three colored rings at slightly different radii | Faces flash red, green and blue separately |
-| **Crackle**: shatter on impact | Faces show fine crack lines like crackle glass | Shatters on impact into shards that hit nearby enemies | Shards spray out from each enemy it pierces | The ring cracks and throws shards past its edge | Shatters into shards when it finishes |
-| **Exploded**: bigger area, with gaps | Faces float slightly apart from the body, like an exploded diagram (in 2D the face splits into wedges) | Comes apart in flight into a loose cluster | Separates into parallel strands covering a wider band | Ring segments drift apart and reach further | Faces separate, covering a larger area |
+**Base rule: faces are shield plates.** Each face blocks hits coming from its side. When enough damage gets through, the plate breaks and only then does damage reach your Integrity (your HP). Broken plates regrow on their own (no upkeep). Your Form changes how this plays: a tetrahedron has 4 big plates, an icosahedron has 20 small ones.
 
-Prism's three-way split means part of every attack always lands on the enemy's weak color (§5).
+**Traits** *(proposed)*. Faces are clear glass by default. Each trait changes a different property of that glass, so all of them can stack (Harmonics). Picture cracked, mirrored, stained-glass plates.
 
-Dropped from the earlier list: **Hollow** (removing the faces hides every other face trait), **Dense** (opaque faces hide the Cell fractal), and **Mirror** (shares the light-bending property with Prism; kept as a possible alternative).
+| Trait | Property | While attached (defense) |
+|---|---|---|
+| **Mirror** | Finish | Hits that land on a plate **bounce back** as a visible projectile at whatever hit you |
+| **Crackle** | Structure | When a plate breaks, it **shatters outward** into shards that hit nearby enemies |
+| **Stained** | Color | Each plate **takes on the color of the last thing that hit it** and resists that color from then on. Over time you can see which side gets hit by what. |
+
+**Exploded: the trade-off trait.** The faces **leave your body** and float out in front of it as **lenses.**
+- You lose your plates, so hits go straight to Integrity.
+- Your attacks pass through the lenses on their way out and **focus to a bright focal point.** The point is visible, and enemies there take concentrated hits.
+- **The other face traits flip from defense to offense** while exploded:
+
+| Trait | While exploded (lens on attack) |
+|---|---|
+| **Mirror** | Attacks bounce off the lenses at new angles instead of passing through, covering more of the field |
+| **Crackle** | Attacks crack as they pass through and split into shards |
+| **Stained** | Attacks take on the lens's stained color, so one volley can carry several colors |
+
+So Shell is a real choice: plates that protect and retaliate, or lenses that turn the same traits into offense and leave you exposed.
+
+Dropped: Hollow (removing the faces hides every other face trait), Dense (opaque faces hide the Cell fractal), Prism (attack-only; faces are defense now).
 
 **Cell (interior, 3D+):** a fractal lives inside the glass body. **Leveling the item adds recursion depth**, so it visibly gains detail.
 - Menger sponge, Sierpiński tetrahedron, Koch snowflake slices, a Julia set cross-section, and so on.
@@ -186,7 +203,7 @@ The three Vertex traits don't conflict: a corner can glint, leave a trail, and p
 - The slot starts with **1 socket**. The *Harmonics* track (fed by item stars and a Lattice region) unlocks a **2nd and 3rd socket**.
 - Each extra socket holds the trait of another item you own for that slot. Only the main item's affixes count.
 - **No combo effects.** Each trait does exactly what it does alone, and all three just run together.
-- **Weave gets the same treatment** (Dotted, Double, and Wavy use separate axes). **Shell gets it too** once the proposed Prism / Crackle / Exploded trio is confirmed.
+- **Weave gets the same treatment** (Dotted, Double, and Wavy use separate axes). **Shell gets it too:** Mirror, Crackle, and Stained use separate properties (§4.2). Exploded is the one that changes their role.
 
 ### 4.4 Rarity: number sets
 **Integer → Rational → Irrational → Transcendental → Imaginary → Complex**
@@ -242,7 +259,7 @@ These replace the usual physical/magic split.
 - **Build tension:**
   - A **pure** single-color build gets a big *Purity* multiplier but gets walled by enemies of that color.
   - An even **white** build is never walled but is mediocre everywhere.
-  - **Prism** Shell lets one attack hit as all three colors separately.
+  - **Stained** Shell plates pick up resistance to whatever color keeps hitting them; exploded, they dye your attacks.
 - The colors are **pure damage types**, with no status effects attached.
 
 ---
@@ -325,7 +342,6 @@ Every completion gives a **small permanent bonus**.
 | **Fractal Codex** | Every Cell fractal at max recursion | Global bonus |
 | **Constants** | Own every Constant; reveal every digit | Euler's Identity (§6.3), plus a permanent bonus per completed Constant |
 | **Theorems** | Achievements as "proofs" | Prisms, titles |
-| **Synergy Codex** | Named item combos (§9.2) | Discovered combos stay highlighted forever |
 | **Lattice** | Permanent upgrade graph (§10) | Region bonuses |
 
 ### Red dot rules
@@ -347,10 +363,7 @@ Every completion gives a **small permanent bonus**.
 
 That's everything on the body. Each slot only touches its own part of the shape, so nothing competes for the same pixels. **Constants change the attack, not the body.** Equip π and you can see the attack orbiting you.
 
-### 9.2 Synergies *(under review)*
-Leftover from draft 2: a hand-made list of item pairs that would create an extra named effect (e.g. Dotted edges + Comet corners = trails become dotted lines of mines). This is the same "extra combo effect" layer that was turned down for Harmonics. Options: **cut it**, or turn it into a plain **combination log** that records every trait combo you've equipped, with no extra effects, so it's just something to complete.
-
-### 9.3 Inspect view
+### 9.2 Inspect view
 The **Form screen** shows the player large, and you can pinch-zoom and rotate it.
 
 ---
@@ -453,7 +466,7 @@ Every enemy is a **shape × color** combination. The shape decides how it behave
 | **M2: Gear** | Vertex + Weave slots, drops, affixes, reforge, auto-salvage | Items show on the body and change the attack |
 | **M3: Collections** | Red-dot system, Bestiary, Archive, Codex | Clearing dots feels great |
 | **M4: Dimensions 1–3** | Laser, Pulse, Clone, Shell + Cell, RGB, Rifts, Lattice | Can ascend to 3D with all four attacks |
-| **M5: Depth content** | Sets, synergies, color-themed Layers, bosses | Systems complete. **Decide on 4D here.** |
+| **M5: Depth content** | Sets, color-themed Layers, bosses | Systems complete. **Decide on 4D here.** |
 | **M5.5: Relics** | Euler's five Constants, Threshold boss drops, digit leveling, Euler's Identity | All five playable, second slot unlockable |
 | **M6: Ship to phone** | Offline progress, Capacitor APK via CI, haptics, audio, balance pass | Installed APK on the S25 Ultra |
 | **M7+: Forever** | Pull from the backlog (§16.4), alternating modular and integrated | Never "done" |
@@ -461,12 +474,12 @@ Every enemy is a **shape × color** combination. The shape decides how it behave
 ---
 
 ## 15. Open questions / agenda
-1. **Shell:** confirm Prism / Crackle / Exploded (§4.2).
-2. **Synergy Codex:** cut it, or keep it as a plain combination log (§9.2)?
+1. **Shell:** confirm Mirror / Crackle / Stained + Exploded (§4.2).
+2. **Collections:** the Synergy Codex is gone, but you want a collection system for *something*. What should be collected? Still open.
 3. **Cell fractals:** the list, and what each one does. Next after Shell.
 4. **Sets:** 2- and 4-piece bonuses that change how something works, not +X%.
-5. **Enemies + Layers:** the enemy roster, each Layer's color theme, and the bosses that guard each Constant.
-6. **Lattice:** what the new multiplier types are, and how the graph is laid out.
+5. **Enemies + Layers:** to discuss later. Threshold bosses every 100 Depth guarding Constants is confirmed.
+6. **Lattice:** liked; details later.
 7. **4D:** parked until M5.
 
 ---
@@ -493,7 +506,6 @@ Keeping that last rule strict means a modular feature can always be removed safe
 | Constants | Integrated | Thresholds, attacks |
 | Euler's Identity | Integrated | Constants |
 | Archive + Perfection Codex | Integrated | Gear |
-| Synergy Codex | Integrated | Gear |
 | Lattice | Integrated | Currencies |
 | Rifts | Integrated | Gear, Forms |
 | Fractal Cell + Codex | Integrated | Cell slot |
