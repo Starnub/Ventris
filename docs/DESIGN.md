@@ -157,28 +157,17 @@ Each item has **one trait.** It shows on your body and changes whichever attack 
 
 **Base rule: faces are shield plates.** Each face blocks hits coming from its side. When enough damage gets through, the plate breaks and only then does damage reach your Integrity (your HP). Broken plates regrow on their own (no upkeep). Your Form changes how this plays: a tetrahedron has 4 big plates, an icosahedron has 20 small ones.
 
-**Traits** *(proposed)*. Faces are clear glass by default. Each trait changes a different property of that glass, so all of them can stack (Harmonics). Picture cracked, mirrored, stained-glass plates.
+**Traits** *(proposed)*. Faces are clear glass by default. Each trait changes a different property of the glass, so all three can stack (Harmonics).
 
-| Trait | Property | While attached (defense) |
-|---|---|---|
-| **Mirror** | Finish | Hits that land on a plate **bounce back** as a visible projectile at whatever hit you |
-| **Crackle** | Structure | When a plate breaks, it **shatters outward** into shards that hit nearby enemies |
-| **Stained** | Color | Each plate **takes on the color of the last thing that hit it** and resists that color from then on. Over time you can see which side gets hit by what. |
+| Trait | Property | Body | Effect |
+|---|---|---|---|
+| **Exploded** | Position | Faces float out from the body with **visible gaps** between them | **Trades defense for attack.** Hits can slip through the gaps straight to Integrity. Your attacks pass through the floating faces as **lenses** and focus to a bright, visible focal point that hits hard. |
+| **Crackle** | Structure | Fine crack lines across each face | When a plate breaks it **shatters outward** into shards that hit nearby enemies |
+| **Stained** | Color | Faces gradually become stained glass | Each plate **takes on the color of the last thing that hit it** and resists that color from then on. You can see which side gets hit by what. |
 
-**Exploded: the trade-off trait.** The faces **leave your body** and float out in front of it as **lenses.**
-- You lose your plates, so hits go straight to Integrity.
-- Your attacks pass through the lenses on their way out and **focus to a bright focal point.** The point is visible, and enemies there take concentrated hits.
-- **The other face traits flip from defense to offense** while exploded:
+All three together: cracked stained-glass lenses floating around you. Interplay happens without extra rules. Exploded plates sit further out, so Crackle's shards burst closer to enemies. *Open: should attacks passing through a Stained lens take its color, the way light through stained glass does?*
 
-| Trait | While exploded (lens on attack) |
-|---|---|
-| **Mirror** | Attacks bounce off the lenses at new angles instead of passing through, covering more of the field |
-| **Crackle** | Attacks crack as they pass through and split into shards |
-| **Stained** | Attacks take on the lens's stained color, so one volley can carry several colors |
-
-So Shell is a real choice: plates that protect and retaliate, or lenses that turn the same traits into offense and leave you exposed.
-
-Dropped: Hollow (removing the faces hides every other face trait), Dense (opaque faces hide the Cell fractal), Prism (attack-only; faces are defense now).
+Dropped: **Mirror** (an opaque, reflective finish can't double as a see-through lens), Hollow (hides other face traits), Dense (hides the Cell fractal), Prism (attack-only).
 
 **Cell (interior, 3D+):** a fractal lives inside the glass body. **Leveling the item adds recursion depth**, so it visibly gains detail.
 - Menger sponge, Sierpiński tetrahedron, Koch snowflake slices, a Julia set cross-section, and so on.
@@ -203,7 +192,7 @@ The three Vertex traits don't conflict: a corner can glint, leave a trail, and p
 - The slot starts with **1 socket**. The *Harmonics* track (fed by item stars and a Lattice region) unlocks a **2nd and 3rd socket**.
 - Each extra socket holds the trait of another item you own for that slot. Only the main item's affixes count.
 - **No combo effects.** Each trait does exactly what it does alone, and all three just run together.
-- **Weave gets the same treatment** (Dotted, Double, and Wavy use separate axes). **Shell gets it too:** Mirror, Crackle, and Stained use separate properties (§4.2). Exploded is the one that changes their role.
+- **Weave gets the same treatment** (Dotted, Double, and Wavy use separate axes). **Shell gets it too:** Exploded, Crackle, and Stained use separate properties (§4.2).
 
 ### 4.4 Rarity: number sets
 **Integer → Rational → Irrational → Transcendental → Imaginary → Complex**
@@ -259,7 +248,7 @@ These replace the usual physical/magic split.
 - **Build tension:**
   - A **pure** single-color build gets a big *Purity* multiplier but gets walled by enemies of that color.
   - An even **white** build is never walled but is mediocre everywhere.
-  - **Stained** Shell plates pick up resistance to whatever color keeps hitting them; exploded, they dye your attacks.
+  - **Stained** Shell plates pick up resistance to whatever color keeps hitting them.
 - The colors are **pure damage types**, with no status effects attached.
 
 ---
@@ -474,7 +463,7 @@ Every enemy is a **shape × color** combination. The shape decides how it behave
 ---
 
 ## 15. Open questions / agenda
-1. **Shell:** confirm Mirror / Crackle / Stained + Exploded (§4.2).
+1. **Shell:** confirm Exploded / Crackle / Stained, and whether Stained lenses tint attacks (§4.2).
 2. **Collections:** the Synergy Codex is gone, but you want a collection system for *something*. What should be collected? Still open.
 3. **Cell fractals:** the list, and what each one does. Next after Shell.
 4. **Sets:** 2- and 4-piece bonuses that change how something works, not +X%.
