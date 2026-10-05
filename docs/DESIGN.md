@@ -170,20 +170,19 @@ Each item has **one trait.** It shows on your body and changes whichever attack 
 3. **Simple and readable on 20 faces *and* on one merged Facade.** No fine detail such as cracks.
 4. **Changes a real property of the face**, and that property differs from the other two traits so they can stack.
 5. **Defensive, and not a plain number tweak.** No rhythmic shoves, no fade-in/out dodging.
+6. **Works on a face that's attached to the shape.** Without Facade, a face is part of the body, so it can't physically steer things away.
+7. **Feels like a fundamental change to the face**, not a side effect, and it reads instantly.
 
 **Traits:**
 
 | Trait | Property | Body | Effect | Status |
 |---|---|---|---|---|
 | **Facade** | Arrangement | All the faces **merge into one large face** that stays pointed at the enemies while the shape turns behind it | **One shield, one shared health pool.** Rotation can't expose gaps anymore, but when the Facade breaks, everything is open until it regrows. | Confirmed |
-| **Refract** | Bending | Clear glass that visibly bends whatever is behind it, including the fractal | Enemy shots **pass through the face and bend away** from your core, so the face isn't worn down by them. As with real glass, a shot that hits **dead-on doesn't bend** and goes straight through to you. | Proposed |
-| **Prism** | Splitting | Rainbow fringes along the face's edges | Each enemy shot **splits into a red, a green, and a blue ray** that fan apart. Each ray carries a third of the hit and is checked against your resistance to its own color (§5). The wide rays tend to miss. | Proposed |
+| *(open)* | | | Two more traits needed | Open |
 
-Refract and Prism combine the way a real prism does: shots get bent *and* split.
+Not yet reviewed: **Trap** (total internal reflection). Shots that enter the face get caught inside the glass as bouncing light streaks until they fade, with limited capacity per face.
 
-Backup: **Trap** (total internal reflection): shots that enter the face get caught inside the glass, bouncing around as visible light streaks until they fade. Each face can only hold so many at once.
-
-Dropped: **Mirror** (opaque, hides the fractal), **Amber** and **Elastic** (too organic), **Exploded** (not unique enough), **Stained** (a single merged face constantly changing color doesn't work), **Vessel** (didn't change a property of the face itself), **Absorb**, **Crackle** (too busy on 12–20 faces), **Heartbeat**, **Phase**, Hollow, Dense, Prism.
+Dropped: **Refract** (too complicated, and an attached face can't bend things away from the body), **Prism** (doesn't read well, and doesn't feel like a fundamental change), **Mirror** (opaque, hides the fractal), **Amber** and **Elastic** (too organic), **Exploded** (not unique enough), **Stained** (a single merged face constantly changing color doesn't work), **Vessel** (didn't change a property of the face itself), **Absorb**, **Crackle** (too busy on 12–20 faces), **Heartbeat**, **Phase**, Hollow, Dense.
 
 **Cell (interior, 3D+):** a fractal lives inside the glass body. **Leveling the item adds recursion depth**, so it visibly gains detail.
 - Menger sponge, Sierpiński tetrahedron, Koch snowflake slices, a Julia set cross-section, and so on.
@@ -208,7 +207,7 @@ The three Vertex traits don't conflict: a corner can glint, leave a trail, and p
 - The slot starts with **1 socket**. The *Harmonics* track (fed by item stars and a Lattice region) unlocks a **2nd and 3rd socket**.
 - Each extra socket holds the trait of another item you own for that slot. Only the main item's affixes count.
 - **No combo effects.** Each trait does exactly what it does alone, and all three just run together.
-- **Weave gets the same treatment** (Dotted, Double, and Wavy use separate axes). **Shell gets it too:** Facade, Refract, and Prism each change a different property (§4.2).
+- **Weave gets the same treatment** (Dotted, Double, and Wavy use separate axes). **Shell gets it too** once its other two traits are found (§4.2).
 
 ### 4.4 Rarity: number sets
 **Integer → Rational → Irrational → Transcendental → Imaginary → Complex**
@@ -478,7 +477,7 @@ Every enemy is a **shape × color** combination. The shape decides how it behave
 ---
 
 ## 15. Open questions / agenda
-1. **Shell:** Facade confirmed. Refract + Prism proposed (§4.2).
+1. **Shell:** Facade confirmed. Two more traits needed (§4.2).
 2. **Collections:** the Synergy Codex is gone, but you want a collection system for *something*. What should be collected? Still open.
 3. **Cell fractals:** the list, and what each one does. Next after Shell.
 4. **Sets:** 2- and 4-piece bonuses that change how something works, not +X%.

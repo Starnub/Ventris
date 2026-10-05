@@ -5,4 +5,4 @@ An idle tower defense game for Android (Galaxy S25 Ultra) set in an abstract dim
 - Visual style: pure black with liquid-glass UI. Everything is procedural geometry.
 - Status: planning
 
-See [`docs/DESIGN.md`](docs/DESIGN.md) for the full design plan.
+See [`docs/DESIGN.md`](docs/DESIGN.md) for the full design plan. Starting a new chat? Read [`docs/HANDOFF.md`](docs/HANDOFF.md) first.
