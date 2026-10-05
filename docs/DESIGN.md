@@ -1,4 +1,4 @@
-# Ventris — Design Plan (draft 4)
+# Ventris — Design Plan (draft 5)
 
 > Working title. Idle tower defense where **you are the tower**, an abstract shape in a pitch-black void.
 > It levels up for good: no prestige, no resets, no upkeep. Every piece of gear you equip shows up on the shape.
@@ -18,7 +18,7 @@
 | Item effects | **One trait per item,** shown on the body *and* applied to whatever attack you're using (§4.2). |
 | Damage types | **Red / Green / Blue.** An enemy's color is its resistance (§5). |
 | Sets | 4 pieces, one per slot. More sets, each smaller. |
-| Vertex items | **Flare, Comet, Beacon:** all light and motion. A late unlock lets all three run at once (§4.3). |
+| Stacking | **Within a slot, every trait uses a different visual axis, so traits can run at the same time.** Vertex: Flare + Comet + Beacon. Weave: Dotted + Double + Wavy. A late unlock (Harmonics) enables it, and it adds no extra combo effects (§4.3). |
 | Constants | **Relics that change how you play.** One equipped at a time, each one big (§6). |
 | Scope | **A "forever game."** Development continues for as long as it's fun, so there's no feature cap. |
 | Feature types | **Modular** (fully independent, can be switched off) and **integrated** (depends on or feeds other features), kept roughly balanced (§16). |
@@ -120,13 +120,14 @@ Every item is part of the shape itself, so nothing gets bolted on top.
 ### 4.2 One trait, four versions
 Each item has **one trait.** It shows on your body and changes whichever attack your Form uses.
 
-**Weave (edges):**
+**Weave (edges):** each trait uses its own visual axis. Dotted is the **pattern**, Double is the **count**, Wavy is the **shape**. Any combination stays readable: two parallel dotted sine waves is still obviously all three.
+
 
 | Item | Body | Dot | Laser | Pulse | Clone |
 |---|---|---|---|---|---|
 | **Dotted**: more, smaller hits | Dotted edges | Burst of 3 dots | Pulsed beam, 3 hits | Rapid segmented outline | Edges flicker, extra hits |
 | **Double**: twin | Double-stroked edges | Two parallel dots | Two parallel beams | Two nested pulses | A smaller clone nested inside |
-| **Braided**: wider | Twisted edge pairs | Two dots in a helix | Twisting beam, wider hit | Thicker, wavy ring | Edges twist, larger area |
+| **Wavy**: wider sweep | Edges ripple as sine waves | The dot snakes along a sine path | The beam oscillates side to side, covering a wider band | The ring's edge ripples outward | Clone edges ripple, larger area |
 
 **Shell (faces):**
 
@@ -156,19 +157,11 @@ At **0D the player *is* a vertex**, so these define the whole body early on: a g
 New Vertex traits can be added later as long as they read through light or motion.
 
 #### Harmonics (integrated, late unlock)
-All three Vertex traits share a theme, so they can stack:
-- The Vertex slot starts with **1 socket**. The *Harmonics* track (fed by Vertex item stars and a Lattice region) unlocks a **2nd and 3rd socket**.
-- Each socket holds the trait of a Vertex item you own. Only the main item's affixes count; extra sockets add the trait only.
-- **Pairs and the full trio get named combos** (each one an entry in the Synergy Codex):
-
-| Combo | Traits | Looks like | Does |
-|---|---|---|---|
-| **Meteor** | Flare + Comet | Trails end in a burst | Trails explode when they fade |
-| **Strobe** | Flare + Beacon | Glints fire in sequence around the shape | Bursts chain in a rotating order |
-| **Chase** | Comet + Beacon | Trail segments light up one after another, like marquee lights | Trail damage ramps along its length |
-| **Corona** | All three | The shape becomes a pulsar: rotating glints, trails, and sequenced light | All of the above + a combo multiplier |
-
-- **Later on:** Weave has its own trio (Dotted, Double, Braided), so the same Harmonics system can come to edges later, and then to faces.
+The three Vertex traits don't conflict: a corner can glint, leave a trail, and pass light to the next corner **all at the same time.** Harmonics simply lets them run together.
+- The slot starts with **1 socket**. The *Harmonics* track (fed by item stars and a Lattice region) unlocks a **2nd and 3rd socket**.
+- Each extra socket holds the trait of another item you own for that slot. Only the main item's affixes count.
+- **No combo effects.** Each trait does exactly what it does alone, and all three just run together.
+- **Weave gets the same treatment** (Dotted, Double, and Wavy use separate axes). **Shell can't yet:** Hollow and Dense are opposites on the same axis, so Shell would need redesigning before it could stack.
 
 ### 4.4 Rarity: number sets
 **Integer → Rational → Irrational → Transcendental → Imaginary → Complex**
@@ -231,32 +224,34 @@ These replace the usual physical/magic split.
 
 ## 6. Constants (relics)
 
-Constants are **rare relics that change the way you play.** They aren't stat sticks: each one rewrites a rule of combat, and each has a real downside, so equipping one is a real decision.
+Constants are **rare relics that change the way you play.** They aren't stat sticks: each one rewrites a rule of combat in a way you can **see**, and it's tied to what the number actually means.
 
 ### 6.1 Rules
 - **One equipped at a time.** A second slot is unlocked by *Euler's Identity* (§6.3).
-- **Where they come from:** each Constant has a home **Threshold boss**. The first kill guarantees it. That gives Depth pushing concrete goals, separate from the Rift RNG.
-- **Leveling reveals digits.** π goes from 3 → 3.1 → 3.14 → 3.141 → 3.1415. Re-killing its boss with Depth lock drops the next digit. Constants without useful digits get their own ladder (i: i → i² → i³ → i⁴).
-- **One trait, four versions** applies here too: every Constant works with all four attack types.
+- **Where they come from:** each Constant has a home **Threshold boss**. The first kill guarantees it.
+- **Leveling reveals digits.** π goes 3 → 3.1 → 3.14 → 3.141 → 3.1415, and e goes 2 → 2.7 → 2.71 → … Re-killing its boss with Depth lock drops the next digit. Constants without useful digits get their own ladder (i: i → i² → i³ → i⁴).
+- Every Constant works with all four attack types.
 
-### 6.2 First set of Constants
+### 6.2 Euler's five
 
-| Constant | Rule change | Dot / Laser / Pulse / Clone | Downside |
-|---|---|---|---|
-| **π** (Orbit) | Attacks don't fly outward. They **circle you** at your range radius. | Dots orbit / the beam sweeps a full circle like a lighthouse / pulse rings spin and linger / clones orbit you | Nothing beyond your radius gets hit |
-| **e** (Compound) | Damage **grows exponentially** the longer you go without taking a hit | Every attack scales the same way | Any hit resets the growth |
-| **φ** (Golden) | Each consecutive hit on the same target deals **φ×** the previous one (Fibonacci) | All attacks lock onto one target | Terrible against swarms |
-| **γ** (Harmonic) | Every attack hits **every enemy on screen**; the k-th nearest takes 1/k damage | All attacks become screen-wide | Weak single-target damage |
-| **√2** (Bisect) | Every hit **splits into two** at right angles with 1/√2 damage, branching like a fractal tree | Splits are shaped like the attack | Damage per branch drops quickly |
-| **δ** (Feigenbaum / Chaos) | Each attack's stats **reroll** every shot (0.1×–10×), and sometimes the attack switches dimension | Pure RNG | Unreliable, by design |
-| **i** (Imaginary) | A **phantom copy** of every wave appears, rotated 90°. Phantoms drop loot too. | You fight both planes | Twice the pressure |
-| **0** (Null) | **You stop attacking.** Your shape grows and erases whatever touches it, scaling with Integrity. | Attack replaced by contact | No range at all |
-| **1** (Unity) | All attacks **merge into one** huge strike every N seconds | One giant dot / beam / pulse / clone | Long gaps between strikes |
-| **−1** (Inversion) | **Enemy colors invert:** resistances become weaknesses | Every attack | Your own resistances invert too |
-| **∞** (Lemniscate) | Projectiles **never expire.** They wrap around the screen edges. | Lasers bounce off the edges, pulses echo | Damage per projectile is cut sharply |
+| Constant | Meaning | Rule change | Dot / Laser / Pulse / Clone | Downside |
+|---|---|---|---|---|
+| **π** (Orbit) | The circle | Attacks don't fly outward. They **circle you** at your range radius. | Dots orbit / the beam sweeps a full circle like a lighthouse / pulse rings spin and linger / clones orbit you | Nothing beyond your radius gets hit |
+| **0** (Null) | Nothing | **You stop attacking.** Your shape grows and erases whatever touches it, scaling with Integrity. | Attack replaced by contact | No range at all |
+| **e** (Growth) | Exponential growth | Attacks **start tiny and grow exponentially** as they travel. Far enemies take huge hits, close ones take tiny hits. | The dot swells into an orb / the beam widens into a cone / the pulse gets *stronger* as it expands / the clone starts small and swells | Weak up close |
+| **i** (Rotation) | A quarter turn in the complex plane | Every attack is **copied with 4-fold symmetry**: the original plus copies rotated 90°, 180°, 270° around you | 4 dots in a cross / laser becomes a + / pulse alternates rotated by 45° / 4 clones in a square around the target | Only one copy aims at the target; the rest go where they go |
+| **1** (Unity) | Identity: one whole | **All enemies in a wave share one health pool.** Damage to any of them hurts all of them. Thin lines link them into one constellation. | Area attacks hit the pool once per enemy touched, so AoE becomes king | Nobody dies until the whole wave does, so they all keep advancing |
 
 ### 6.3 Euler's Identity
-**e^(iπ) + 1 = 0** uses exactly five constants: **e, i, π, 1, 0.** Collect all five and *Euler's Identity* unlocks the **second Constant slot**. It's a long-term goal that ties together five boss hunts, and the equation fills in on screen as you collect them.
+**e^(iπ) + 1 = 0** uses exactly these five. Collect all five and *Euler's Identity* unlocks the **second Constant slot**, and the equation fills in on screen as you go. With two slots, combinations happen naturally with no special effects needed: π + i gives four orbiting streams, and e + π gives orbits that grow as they circle.
+
+### 6.4 More candidates (unconfirmed)
+| Constant | Idea |
+|---|---|
+| **Golden angle** (137.5°, from φ) | Attacks stop targeting. They're **planted** at golden-angle steps spiraling outward from you, filling the field like a sunflower head with lingering hits |
+| **2** (Binary) | You **split into two smaller copies** orbiting each other, like a binary star. Two attack sources, each with half the stats. |
+| **ℵ₀** (Countable infinity) | Every **kill re-fires your attack from the corpse**, so chain reactions run through dense waves |
+| **ε** (Infinitesimal) | You shrink to almost nothing and become hard to hit. Your attack breaks into a **dust of countless micro-hits**. |
 
 ---
 
@@ -285,7 +280,7 @@ Every completion gives a **small permanent bonus**.
 | **Fractal Codex** | Every Cell fractal at max recursion | Global bonus |
 | **Constants** | Own every Constant; reveal every digit | Euler's Identity (§6.3), plus a permanent bonus per completed Constant |
 | **Theorems** | Achievements as "proofs" | Prisms, titles |
-| **Synergy Codex** | Named item combos (§9.2) and Harmonics combos (§4.3) | Discovered combos stay highlighted forever |
+| **Synergy Codex** | Named item combos (§9.2) | Discovered combos stay highlighted forever |
 | **Lattice** | Permanent upgrade graph (§10) | Region bonuses |
 
 ### Red dot rules
@@ -300,8 +295,8 @@ Every completion gives a **small permanent bonus**.
 
 ### 9.1 Everything on the player
 - **The Form**, tinted by your color mix
-- **Vertex** effect on the corners (up to 3 with Harmonics, all light/motion, so they layer cleanly)
-- **Weave** effect on the edges
+- **Vertex** traits on the corners (up to 3 with Harmonics: glint + trail + travelling light)
+- **Weave** traits on the edges (up to 3 with Harmonics: pattern + count + shape)
 - **Shell** effect on the faces
 - **Cell** fractal inside, seen through the faces
 
@@ -417,7 +412,7 @@ Every enemy is a **shape × color** combination. The shape decides how it behave
 | **M3: Collections** | Red-dot system, Bestiary, Archive, Codex | Clearing dots feels great |
 | **M4: Dimensions 1–3** | Laser, Pulse, Clone, Shell + Cell, RGB, Rifts, Lattice | Can ascend to 3D with all four attacks |
 | **M5: Depth content** | Sets, synergies, color-themed Layers, bosses | Systems complete. **Decide on 4D here.** |
-| **M5.5: Relics** | Constants, Threshold boss drops, digit leveling, Euler's Identity | First 5 Constants playable |
+| **M5.5: Relics** | Euler's five Constants, Threshold boss drops, digit leveling, Euler's Identity | All five playable, second slot unlockable |
 | **M6: Ship to phone** | Offline progress, Capacitor APK via CI, haptics, audio, balance pass | Installed APK on the S25 Ultra |
 | **M7+: Forever** | Pull from the backlog (§16.4), alternating modular and integrated | Never "done" |
 
@@ -425,7 +420,7 @@ Every enemy is a **shape × color** combination. The shape decides how it behave
 
 ## 15. Open questions
 1. **4D:** decide at M5.
-2. **Which Constants first?** I'd start with π, e, φ, 0, and 1. Four of them are Euler's Identity pieces, and together they cover very different playstyles.
+2. **Constants:** are the new e, i, and 1 right? Which candidates in §6.4 should stay?
 3. **Backlog picks:** which ideas in §16.4 sound good, and which should go.
 
 ---
@@ -448,11 +443,11 @@ Keeping that last rule strict means a modular feature can always be removed safe
 | RGB damage types | Integrated | Gear affixes, enemies |
 | Rarity + rerolling | Integrated | Gear |
 | Sets | Integrated | Gear |
-| Harmonics | Integrated | Vertex items, Lattice |
+| Harmonics | Integrated | Vertex + Weave items, Lattice |
 | Constants | Integrated | Thresholds, attacks |
 | Euler's Identity | Integrated | Constants |
 | Archive + Perfection Codex | Integrated | Gear |
-| Synergy Codex | Integrated | Gear, Harmonics |
+| Synergy Codex | Integrated | Gear |
 | Lattice | Integrated | Currencies |
 | Rifts | Integrated | Gear, Forms |
 | Fractal Cell + Codex | Integrated | Cell slot |
@@ -490,7 +485,7 @@ A **Features** screen in Settings lists every modular feature with an on/off swi
 | Idea | Depends on | What it is |
 |---|---|---|
 | **Form Mastery** | Forms | Each Form levels with use and unlocks a perk unique to that Form |
-| **Weave / Shell Harmonics** | Harmonics | Multi-socket stacking for edges, then faces |
+| **Shell Harmonics** | Harmonics | Redesign Shell traits onto separate axes so faces can stack too |
 | **Conjectures** | Forms, RGB, gear | Permanent side Depths with constraints (1D only, single color, no Shell). No resets, and the rewards are permanent. |
 | **Imprinting** | Archive, gear | Copy a trait from an enshrined item onto a new one |
 | **Constant Proofs** | Constants | A small tuning tree per Constant |
