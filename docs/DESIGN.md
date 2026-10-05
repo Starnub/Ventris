@@ -1,4 +1,4 @@
-# Ventris — Design Plan (draft 3)
+# Ventris — Design Plan (draft 4)
 
 > Working title. Idle tower defense where **you are the tower**, an abstract shape in a pitch-black void.
 > It levels up for good: no prestige, no resets, no upkeep. Every piece of gear you equip shows up on the shape.
@@ -18,6 +18,10 @@
 | Item effects | **One trait per item,** shown on the body *and* applied to whatever attack you're using (§4.2). |
 | Damage types | **Red / Green / Blue.** An enemy's color is its resistance (§5). |
 | Sets | 4 pieces, one per slot. More sets, each smaller. |
+| Vertex items | **Flare, Comet, Beacon:** all light and motion. A late unlock lets all three run at once (§4.3). |
+| Constants | **Relics that change how you play.** One equipped at a time, each one big (§6). |
+| Scope | **A "forever game."** Development continues for as long as it's fun, so there's no feature cap. |
+| Feature types | **Modular** (fully independent, can be switched off) and **integrated** (depends on or feeds other features), kept roughly balanced (§16). |
 
 ---
 
@@ -30,6 +34,7 @@
 5. **Small things to finish.** Many shallow systems you can 100%, each with its own red dots and a completion moment.
 6. **The menus are the game.** All decisions happen in menus, so they need to feel better than any menu you've used.
 7. **Pure math visuals.** Everything is generated geometry. No art assets.
+8. **Forever game.** Built to keep growing. Every new feature plugs into the same structure and either stands alone or connects on purpose (§16).
 
 **Closest reference:** *The Tower* (Tech Tree Games), but with no runs. It's one continuous farm.
 
@@ -105,7 +110,7 @@ Keep it as a capstone with only the clean polytopes (5-cell, tesseract, 16-cell)
 
 | Slot | Part | Unlocks | Status |
 |---|---|---|---|
-| **Vertex** | Corners | 0D | Effects need rework (§4.3) |
+| **Vertex** | Corners | 0D | Settled |
 | **Weave** | Edges and lines | 1D | Settled |
 | **Shell** | Faces and fills | 2D | Settled |
 | **Cell** | The interior volume, which holds a **fractal** | 3D | Settled |
@@ -137,20 +142,33 @@ Each item has **one trait.** It shows on your body and changes whichever attack 
 - The effect is passive and global, e.g. "+X% damage per recursion level", "hits spawn a smaller copy of the fractal".
 - Because the fractal sits inside the shape, it doesn't add visual clutter. You see it through the glass faces, and Hollow vs Dense Shell changes how visible it is, which gives a small free combo.
 
-### 4.3 Vertex: open problem
-The first ideas (truncate, round, node) don't work: **fine changes to corner geometry are unreadable on a 3D shape with 12–20 small corners.** Stellate is the exception because spikes change the silhouette.
+### 4.3 Vertex: light and motion
+Corners are tiny on a 3D shape with 12–20 of them, so fine changes to their geometry can't be read. **Vertex effects show through light and motion instead.** That rule holds up at any size.
 
-**Rule for Vertex effects:** they must read through **silhouette, light, size, or motion**, not through fine detail.
+| Item | Body | Effect on the attack |
+|---|---|---|
+| **Flare** | Corners shine as star glints | A small burst at each impact point |
+| **Comet** | Corners leave light trails as the shape spins (spirograph) | Attacks leave a damaging trail |
+| **Beacon** | Light runs from corner to corner in sequence | Fire rate climbs while you keep attacking |
 
-| Candidate | Reads through | Body | Effect on the attack |
+At **0D the player *is* a vertex**, so these define the whole body early on: a glinting point, a comet, a pulsing beacon.
+
+New Vertex traits can be added later as long as they read through light or motion.
+
+#### Harmonics (integrated, late unlock)
+All three Vertex traits share a theme, so they can stack:
+- The Vertex slot starts with **1 socket**. The *Harmonics* track (fed by Vertex item stars and a Lattice region) unlocks a **2nd and 3rd socket**.
+- Each socket holds the trait of a Vertex item you own. Only the main item's affixes count; extra sockets add the trait only.
+- **Pairs and the full trio get named combos** (each one an entry in the Synergy Codex):
+
+| Combo | Traits | Looks like | Does |
 |---|---|---|---|
-| **Stellate** | Silhouette | Corners pull out into spikes | Crit: spiked projectiles, the pulse's corners reach further |
-| **Bead** | Size | Ball-and-stick look (big glowing orbs at corners) | Heavy impact + knockback |
-| **Flare** | Light | Corners shine as star glints | A small burst at each impact point |
-| **Comet** | Motion | Corners leave light trails as the shape spins (spirograph) | Attacks leave a damaging trail |
-| **Beacon** | Motion | Light runs from corner to corner in sequence | Fire rate climbs while you keep attacking |
+| **Meteor** | Flare + Comet | Trails end in a burst | Trails explode when they fade |
+| **Strobe** | Flare + Beacon | Glints fire in sequence around the shape | Bursts chain in a rotating order |
+| **Chase** | Comet + Beacon | Trail segments light up one after another, like marquee lights | Trail damage ramps along its length |
+| **Corona** | All three | The shape becomes a pulsar: rotating glints, trails, and sequenced light | All of the above + a combo multiplier |
 
-At **0D the player *is* a vertex**, so Vertex items define the whole body early on: a spiked star, a fat orb, a glinting point, a comet. That makes them a nice first slot to learn on.
+- **Later on:** Weave has its own trio (Dotted, Double, Braided), so the same Harmonics system can come to edges later, and then to faces.
 
 ### 4.4 Rarity: number sets
 **Integer → Rational → Irrational → Transcendental → Imaginary → Complex**
@@ -211,7 +229,38 @@ These replace the usual physical/magic split.
 
 ---
 
-## 6. Pulls: Rifts
+## 6. Constants (relics)
+
+Constants are **rare relics that change the way you play.** They aren't stat sticks: each one rewrites a rule of combat, and each has a real downside, so equipping one is a real decision.
+
+### 6.1 Rules
+- **One equipped at a time.** A second slot is unlocked by *Euler's Identity* (§6.3).
+- **Where they come from:** each Constant has a home **Threshold boss**. The first kill guarantees it. That gives Depth pushing concrete goals, separate from the Rift RNG.
+- **Leveling reveals digits.** π goes from 3 → 3.1 → 3.14 → 3.141 → 3.1415. Re-killing its boss with Depth lock drops the next digit. Constants without useful digits get their own ladder (i: i → i² → i³ → i⁴).
+- **One trait, four versions** applies here too: every Constant works with all four attack types.
+
+### 6.2 First set of Constants
+
+| Constant | Rule change | Dot / Laser / Pulse / Clone | Downside |
+|---|---|---|---|
+| **π** (Orbit) | Attacks don't fly outward. They **circle you** at your range radius. | Dots orbit / the beam sweeps a full circle like a lighthouse / pulse rings spin and linger / clones orbit you | Nothing beyond your radius gets hit |
+| **e** (Compound) | Damage **grows exponentially** the longer you go without taking a hit | Every attack scales the same way | Any hit resets the growth |
+| **φ** (Golden) | Each consecutive hit on the same target deals **φ×** the previous one (Fibonacci) | All attacks lock onto one target | Terrible against swarms |
+| **γ** (Harmonic) | Every attack hits **every enemy on screen**; the k-th nearest takes 1/k damage | All attacks become screen-wide | Weak single-target damage |
+| **√2** (Bisect) | Every hit **splits into two** at right angles with 1/√2 damage, branching like a fractal tree | Splits are shaped like the attack | Damage per branch drops quickly |
+| **δ** (Feigenbaum / Chaos) | Each attack's stats **reroll** every shot (0.1×–10×), and sometimes the attack switches dimension | Pure RNG | Unreliable, by design |
+| **i** (Imaginary) | A **phantom copy** of every wave appears, rotated 90°. Phantoms drop loot too. | You fight both planes | Twice the pressure |
+| **0** (Null) | **You stop attacking.** Your shape grows and erases whatever touches it, scaling with Integrity. | Attack replaced by contact | No range at all |
+| **1** (Unity) | All attacks **merge into one** huge strike every N seconds | One giant dot / beam / pulse / clone | Long gaps between strikes |
+| **−1** (Inversion) | **Enemy colors invert:** resistances become weaknesses | Every attack | Your own resistances invert too |
+| **∞** (Lemniscate) | Projectiles **never expire.** They wrap around the screen edges. | Lasers bounce off the edges, pulses echo | Damage per projectile is cut sharply |
+
+### 6.3 Euler's Identity
+**e^(iπ) + 1 = 0** uses exactly five constants: **e, i, π, 1, 0.** Collect all five and *Euler's Identity* unlocks the **second Constant slot**. It's a long-term goal that ties together five boss hunts, and the equation fills in on screen as you collect them.
+
+---
+
+## 7. Pulls: Rifts
 
 - **Prisms** come only from playing: Thresholds, milestones, Codex completions, daily local-clock bonuses. Generous.
 - **What you pull:** gear, Forms.
@@ -222,7 +271,7 @@ These replace the usual physical/magic split.
 
 ---
 
-## 7. Shallow completable systems
+## 8. Shallow completable systems
 
 Every completion gives a **small permanent bonus**.
 
@@ -234,10 +283,10 @@ Every completion gives a **small permanent bonus**.
 | **Forms Codex** | Every Form per dimension | +% to that dimension's attack |
 | **Bestiary** | Kill milestones per enemy shape × color (10 / 100 / 1k / 10k / 100k) | +damage vs that type |
 | **Fractal Codex** | Every Cell fractal at max recursion | Global bonus |
-| **Constants** *(undecided)* | Collect π, e, φ, √2, i, … as pure passive stat bonuses | Small permanent stats. They no longer change visuals or attacks. |
+| **Constants** | Own every Constant; reveal every digit | Euler's Identity (§6.3), plus a permanent bonus per completed Constant |
 | **Theorems** | Achievements as "proofs" | Prisms, titles |
-| **Synergy Codex** | Named item combos (§8.2) | Discovered combos stay highlighted forever |
-| **Lattice** | Permanent upgrade graph (§9) | Region bonuses |
+| **Synergy Codex** | Named item combos (§9.2) and Harmonics combos (§4.3) | Discovered combos stay highlighted forever |
+| **Lattice** | Permanent upgrade graph (§10) | Region bonuses |
 
 ### Red dot rules
 - A red dot only means there's something to do right now.
@@ -247,29 +296,29 @@ Every completion gives a **small permanent bonus**.
 
 ---
 
-## 8. How the player is drawn
+## 9. How the player is drawn
 
-### 8.1 Everything on the player
+### 9.1 Everything on the player
 - **The Form**, tinted by your color mix
-- **Vertex** effect on the corners
+- **Vertex** effect on the corners (up to 3 with Harmonics, all light/motion, so they layer cleanly)
 - **Weave** effect on the edges
 - **Shell** effect on the faces
 - **Cell** fractal inside, seen through the faces
 
-That's everything. Each slot only touches its own part of the shape, so nothing competes for the same pixels.
+That's everything on the body. Each slot only touches its own part of the shape, so nothing competes for the same pixels. **Constants change the attack, not the body.** Equip π and you can see the attack orbiting you.
 
-### 8.2 Synergies
+### 9.2 Synergies
 A short hand-made list (~20) of pairs that create a named effect, each with a Synergy Codex entry and a bonus. Examples:
 - **Ellipsis** (Dotted Weave + Comet Vertex): corner trails become dotted lines of mines.
 - **Hall of Mirrors** (Mirror Shell + Double Weave): twin bounces split off in opposite directions.
 - **Lens** (Hollow Shell + Menger Cell): the fractal's holes focus the attack into extra pierce.
 
-### 8.3 Inspect view
+### 9.3 Inspect view
 The **Form screen** shows the player large, and you can pinch-zoom and rotate it.
 
 ---
 
-## 9. Permanent upgrades: the Lattice
+## 10. Permanent upgrades: the Lattice
 
 - An expanding **Penrose / hex tessellation** node graph, bought with **Axioms**.
 - Nodes are permanent. More of the graph opens with each dimension and Layer.
@@ -290,7 +339,7 @@ The **Form screen** shows the player large, and you can pinch-zoom and rotate it
 
 ---
 
-## 10. UI / UX
+## 11. UI / UX
 
 ### Look
 - **True #000** background on the OLED. The only light comes from the game.
@@ -320,7 +369,7 @@ The **Form screen** shows the player large, and you can pinch-zoom and rotate it
 
 ---
 
-## 11. Enemies
+## 12. Enemies
 
 Every enemy is a **shape × color** combination. The shape decides how it behaves, and the color decides what it resists.
 - **Swarm points** (fast, many). Best answer: Pulse.
@@ -332,7 +381,7 @@ Every enemy is a **shape × color** combination. The shape decides how it behave
 
 ---
 
-## 12. Tech plan
+## 13. Tech plan
 
 **TypeScript + WebGL2, packaged as an Android app with Capacitor.**
 
@@ -341,7 +390,8 @@ Every enemy is a **shape × color** combination. The shape decides how it behave
 - **SolidJS** for UI
 - **Glass layer:** DOM for layout and crisp text; a WebGL pass underneath draws all glass shapes and refracts the game through them
 - **Simulation:** fixed timestep, deterministic, seeded RNG, separate from rendering. The same sim runs headless for balance scripts and offline progress.
-- **Content:** items, affixes, sets, Forms, and fractals live in typed data tables
+- **Content:** items, affixes, sets, Forms, fractals, and Constants live in typed data tables
+- **Feature modules** (§16.3): each feature is a self-contained module that registers with the core. The core never imports features. That's what makes a forever game maintainable.
 - **Save:** IndexedDB, versioned with migrations, plus export/import of a save string
 
 ### One device makes this simpler
@@ -357,7 +407,7 @@ Every enemy is a **shape × color** combination. The shape decides how it behave
 
 ---
 
-## 13. Roadmap
+## 14. Roadmap
 
 | Milestone | Goal | Done when |
 |---|---|---|
@@ -367,11 +417,82 @@ Every enemy is a **shape × color** combination. The shape decides how it behave
 | **M3: Collections** | Red-dot system, Bestiary, Archive, Codex | Clearing dots feels great |
 | **M4: Dimensions 1–3** | Laser, Pulse, Clone, Shell + Cell, RGB, Rifts, Lattice | Can ascend to 3D with all four attacks |
 | **M5: Depth content** | Sets, synergies, color-themed Layers, bosses | Systems complete. **Decide on 4D here.** |
+| **M5.5: Relics** | Constants, Threshold boss drops, digit leveling, Euler's Identity | First 5 Constants playable |
 | **M6: Ship to phone** | Offline progress, Capacitor APK via CI, haptics, audio, balance pass | Installed APK on the S25 Ultra |
+| **M7+: Forever** | Pull from the backlog (§16.4), alternating modular and integrated | Never "done" |
 
 ---
 
-## 14. Open questions
-1. **Vertex effects:** which candidates from §4.3 to keep.
-2. **Constants:** keep as a pure passive collection, or cut.
-3. **4D:** decide at M5.
+## 15. Open questions
+1. **4D:** decide at M5.
+2. **Which Constants first?** I'd start with π, e, φ, 0, and 1. Four of them are Euler's Identity pieces, and together they cover very different playstyles.
+3. **Backlog picks:** which ideas in §16.4 sound good, and which should go.
+
+---
+
+## 16. Feature structure: modular vs integrated
+
+### 16.1 Definitions
+| Type | Meaning | Rules |
+|---|---|---|
+| **Core** | The backbone. Can't be turned off. | Depth farm, Forms + attacks, 4 gear slots + affixes, currencies, red dots, glass UI, save |
+| **Modular** | Fully independent. Can be **switched off in Settings → Features** without breaking anything. | Depends only on core. **Nothing else depends on it.** Pays out through the generic reward system (currency, cosmetics, permanent stats). Has its own save section, tab or card, and red-dot source. |
+| **Integrated** | Changes or extends other systems on purpose. | Declares its dependencies. Can't be turned off. May depend on core or on other integrated features, **never on a modular one.** |
+
+Keeping that last rule strict means a modular feature can always be removed safely.
+
+### 16.2 Current ledger
+| Feature | Type | Depends on |
+|---|---|---|
+| Dimensional Ascension | Integrated | Forms, Thresholds |
+| RGB damage types | Integrated | Gear affixes, enemies |
+| Rarity + rerolling | Integrated | Gear |
+| Sets | Integrated | Gear |
+| Harmonics | Integrated | Vertex items, Lattice |
+| Constants | Integrated | Thresholds, attacks |
+| Euler's Identity | Integrated | Constants |
+| Archive + Perfection Codex | Integrated | Gear |
+| Synergy Codex | Integrated | Gear, Harmonics |
+| Lattice | Integrated | Currencies |
+| Rifts | Integrated | Gear, Forms |
+| Fractal Cell + Codex | Integrated | Cell slot |
+| **Bestiary** | **Modular** | — |
+| **Theorems** | **Modular** | — |
+
+Right now it leans heavily integrated, which is normal: the foundation has to be built first. **The backlog leans modular to even things out.**
+
+### 16.3 How modules plug in
+Every feature, of either type, uses the same contract:
+- **Stat contributions:** "+X% damage", new multiplier types
+- **Event hooks:** on kill, on hit, on wave, on Depth change, on Threshold clear, on return from offline
+- **Red-dot provider:** "what's actionable in this feature right now"
+- **UI entry:** a tab, a card in a hub screen, or a section in an existing screen
+- **Save section:** its own versioned namespace, so adding or removing a feature never breaks the save
+- **Data tables:** its content
+
+A **Features** screen in Settings lists every modular feature with an on/off switch. Turning one off pauses its bonuses and hides its UI. Turning it back on resumes it exactly where it was.
+
+### 16.4 Backlog
+
+**Modular**
+| Idea | What it is |
+|---|---|
+| **Tessellation** | A Penrose tile board. Tiles drop from kills, and completed patterns give permanent bonuses. |
+| **Observatory** | Stars appear in the void's background as you kill. Connect them into constellations to fill a star chart. |
+| **Fractal Garden** | Grow L-system plants (ferns, trees, dragon curves) in real time and harvest them for Shards. Species codex. |
+| **Daily Proof** | A short daily geometry puzzle (tangram, slide, dissection) for Prisms |
+| **Resonance** | Unlock scales and modes for the procedural soundtrack. A music collection. |
+| **Spirograph Studio** | Compose your Comet trails into still images. Cosmetic gallery. |
+| **Void Weather** | Random timed events: *Eclipse* (every enemy turns blue for 10 min), *Meteor shower* (loot rain), *Aurora* (double Prisms) |
+| **Knots** | An untangle puzzle that uses real knot diagrams, with a knot codex |
+
+**Integrated**
+| Idea | Depends on | What it is |
+|---|---|---|
+| **Form Mastery** | Forms | Each Form levels with use and unlocks a perk unique to that Form |
+| **Weave / Shell Harmonics** | Harmonics | Multi-socket stacking for edges, then faces |
+| **Conjectures** | Forms, RGB, gear | Permanent side Depths with constraints (1D only, single color, no Shell). No resets, and the rewards are permanent. |
+| **Imprinting** | Archive, gear | Copy a trait from an enshrined item onto a new one |
+| **Constant Proofs** | Constants | A small tuning tree per Constant |
+| **Expeditions** | Forms | Send Forms you aren't using on timed trips into old Layers for loot |
+| **4D** | Ascension, Forms | The capstone dimension, if kept |
