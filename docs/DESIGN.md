@@ -162,12 +162,12 @@ Each item has **one trait.** It shows on your body and changes whichever attack 
 | Trait | Property | Body | Effect |
 |---|---|---|---|
 | **Exploded** | Position | Faces float out from the body with **visible gaps** between them | **Trades defense for attack.** Hits can slip through the gaps straight to Integrity. Your attacks pass through the floating faces as **lenses** and focus to a bright, visible focal point that hits hard. |
-| **Absorb** *(proposed)* | Brightness | Faces fill with light as they take hits: dark means empty, bright means full | Plates **soak up hits as light** instead of cracking. When a plate is full it **flashes**, hitting everything near that side, then goes dark and starts filling again. How bright a face is tells you how close it is to flashing. |
+| **Vessel** | Fill | Every face holds glowing liquid filled to **one shared waterline** that cuts straight across the whole shape. It stays level as the shape turns, and tilts with the phone's gyroscope. | **All plates share one health pool** (communicating vessels: connected containers always settle at the same level). A hit on any face ripples the surface and drops the waterline on every face at once. When it runs dry, every plate drops together; then they refill together. |
 | **Stained** | Color | Faces gradually become stained glass | Each plate **takes on the color of the last thing that hit it** and resists that color from then on. You can see which side gets hit by what. |
 
-All three together: stained-glass lenses floating around you, each glowing brighter as it fills. Interplay happens without extra rules: Exploded plates sit further out, so Absorb's flash goes off further from your body. **Stained lenses do not tint attacks** (decided).
+All three together: stained-glass lenses floating around you, all filled to the same waterline. Interplay happens without extra rules: with Exploded, the waterline stays level across lenses that are physically apart, which shows they're still one pool. Vessel mirrors the Constant **1** (enemies share one pool); here it's your own faces. **Stained lenses do not tint attacks** (decided).
 
-Dropped: **Crackle** (crack lines get too busy on 12–20 faces), **Heartbeat** (rhythmic shove), **Phase** (fade-in/out dodge), **Mirror** (an opaque, reflective finish can't double as a see-through lens), Hollow (hides other face traits), Dense (hides the Cell fractal), Prism (attack-only).
+Dropped: **Absorb** (fill with light, then flash), **Crackle** (crack lines get too busy on 12–20 faces), **Heartbeat** (rhythmic shove), **Phase** (fade-in/out dodge), **Mirror** (an opaque, reflective finish can't double as a see-through lens), Hollow (hides other face traits), Dense (hides the Cell fractal), Prism (attack-only).
 
 **Cell (interior, 3D+):** a fractal lives inside the glass body. **Leveling the item adds recursion depth**, so it visibly gains detail.
 - Menger sponge, Sierpiński tetrahedron, Koch snowflake slices, a Julia set cross-section, and so on.
@@ -463,7 +463,7 @@ Every enemy is a **shape × color** combination. The shape decides how it behave
 ---
 
 ## 15. Open questions / agenda
-1. **Shell:** Exploded and Stained confirmed. Third trait: Absorb proposed (§4.2).
+1. **Shell:** Exploded and Stained confirmed. Third trait: shared HP confirmed, shown as **Vessel** (proposed visual, §4.2).
 2. **Collections:** the Synergy Codex is gone, but you want a collection system for *something*. What should be collected? Still open.
 3. **Cell fractals:** the list, and what each one does. Next after Shell.
 4. **Sets:** 2- and 4-piece bonuses that change how something works, not +X%.
