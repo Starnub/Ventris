@@ -261,7 +261,7 @@ dealt = k · S · (pair / S)²
 - **One tuning knob:** k. The digit ladder (i → i² → i³ → i⁴) raises k a step at a time.
 - **Where it shines:** tanky targets (bosses, Shells) and multi-hit attacks. **Where it's weak:** swarms of enemies that would otherwise die in one hit.
 - **Ghosts stay ghosts** until hit again. No timer, which would be a form of upkeep.
-- **Ghosts can still hurt you.** Making them harmless would turn i into a defensive relic too, which is a lot. Easy to revisit.
+- **Ghosts can still hurt you** (decided). It keeps i a pure offense relic with a real cost.
 - **Check it with the headless sim** (§13) before shipping: equilibrium Depth with i vs without, and clear times against swarm vs boss Layers.
 
 ### 6.4 Rejected ideas
@@ -438,10 +438,14 @@ Every enemy is a **shape × color** combination. The shape decides how it behave
 
 ---
 
-## 15. Open questions
-1. **4D:** decide at M5.
-2. **Constants:** should ghosts stay harmful (§6.5)? Beyond Euler's five, new Constants have to pass the bar in §6.
-3. **Backlog picks:** which ideas in §16.4 sound good, and which should go.
+## 15. Open questions / agenda
+1. **Shell redesign:** put face traits on separate axes so faces can stack like Vertex and Weave.
+2. **Synergy Codex (§9.2):** keep it? It adds combo effects, which Harmonics deliberately avoids.
+3. **Cell fractals:** the list, and what each one actually does.
+4. **Sets:** what 2- and 4-piece bonuses do, held to the same "no plain number tweaks" bar as Constants?
+5. **Enemies + Layers:** the roster, color themes, and the Threshold bosses that guard each Constant.
+6. **Lattice:** the new multiplier types, and how regions are laid out.
+7. **4D:** decide at M5.
 
 ---
 
