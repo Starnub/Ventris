@@ -241,14 +241,31 @@ Constants are **rare relics that change the way you play.** They aren't stat sti
 | **π** (Orbit) | The circle | Attacks don't fly outward. They **circle you** at your range radius. | Dots orbit / the beam sweeps a full circle like a lighthouse / pulse rings spin and linger / clones orbit you | Nothing beyond your radius gets hit |
 | **0** (Null) | Nothing | **You stop attacking.** Your shape grows and erases whatever touches it, scaling with Integrity. | Attack replaced by contact | No range at all |
 | **e** (Growth) | Exponential growth | Attacks **start tiny and grow exponentially** as they travel. Far enemies take huge hits, close ones take tiny hits. | The dot swells into an orb / the beam widens into a cone / the pulse gets *stronger* as it expands / the clone starts small and swells | Weak up close |
-| **i** (Interference) *(proposed)* | Complex amplitudes are why waves interfere | **Your attacks become waves emitted from every vertex of your Form.** Where waves overlap they **interfere**: bright bands deal huge damage, dark bands deal none. The fringe pattern drifts as your shape turns. | Point: one source, so no interference / Line: two sources, the classic **double-slit** pattern / Polygon: n-fold kaleidoscope fringes / Polyhedron: complex 3D fringes projected onto the field | Enemies sitting in dark bands are untouchable until the pattern shifts |
+| **i** (Imaginary) | i · i = −1: two imaginaries make a real | **The first hit deals nothing and turns the enemy into a translucent ghost** (it's now imaginary). **The second hit makes it real again** and deals the pair's damage *squared* (see §6.5). | Dot: steady ghost/shatter rhythm / Laser: one pass ghosts a whole line, the next shatters it / Pulse: two-beat rings, ghost then shatter / Clone: hits several times, so it does both in one attack | Every enemy needs at least two hits, so swarms of weak enemies take longer |
 | **1** (Unity) | Identity: one whole | **All enemies in a wave share one health pool.** Damage to any of them hurts all of them. Thin lines link them into one constellation. | Area attacks hit the pool once per enemy touched, so AoE becomes king | Nobody dies until the whole wave does, so they all keep advancing |
 
 ### 6.3 Euler's Identity
-**e^(iπ) + 1 = 0** uses exactly these five. Collect all five and *Euler's Identity* unlocks the **second Constant slot**, and the equation fills in on screen as you go. With two slots, combinations happen naturally with no special effects needed: **1 + i** means a single enemy caught in a bright band damages the whole linked wave. **e + i** has waves growing as they spread, so the outer fringes hit hardest. **e + π** gives orbits that grow as they circle.
+**e^(iπ) + 1 = 0** uses exactly these five. Collect all five and *Euler's Identity* unlocks the **second Constant slot**, and the equation fills in on screen as you go. With two slots, combinations happen naturally with no special effects needed: **1 + i** sends every squared shatter into the shared health pool. **e + i** has the second hit land harder at range, so distant shatters are enormous. **e + π** gives orbits that grow as they circle.
+
+### 6.5 Balancing i
+**Never square raw damage.** Late-game hits are around 10¹², and squaring that gives 10²⁴, which breaks every number in the game. Square the hit *relative to the current Depth* instead:
+
+```
+S     = reference enemy HP at the current Depth
+pair  = d₁ + d₂                    (each hit after resistances)
+dealt = k · S · (pair / S)²
+```
+
+- **Grows faster than normal damage, but stays bounded.** What gets squared is your power *relative to where you are*, not the raw number. A pair worth 1× an enemy's HP deals k×. Worth 2×, it deals 4k×. Worth ½×, it deals k/4×.
+- **Auto-Depth keeps it in check.** Any lead i gives you pushes you deeper, which raises S and pulls the ratio back down. The game corrects itself.
+- **One tuning knob:** k. The digit ladder (i → i² → i³ → i⁴) raises k a step at a time.
+- **Where it shines:** tanky targets (bosses, Shells) and multi-hit attacks. **Where it's weak:** swarms of enemies that would otherwise die in one hit.
+- **Ghosts stay ghosts** until hit again. No timer, which would be a form of upkeep.
+- **Ghosts can still hurt you.** Making them harmless would turn i into a defensive relic too, which is a lot. Easy to revisit.
+- **Check it with the headless sim** (§13) before shipping: equilibrium Depth with i vs without, and clear times against swarm vs boss Layers.
 
 ### 6.4 Rejected ideas
-Kept here so they don't get proposed again: φ (Fibonacci hit scaling), γ (harmonic screen-wide hits), √2 (branching splits), δ (stat reroll chaos), −1 (color inversion), ∞ (wrapping projectiles), old e (damage grows while unhit), old i (phantom waves; 4-fold attack copies), old 1 (merge into one big strike), golden angle (sunflower planting), 2 (binary split), ℵ₀ (re-fire on kill), ε (micro-hit dust), i as Quarter Turn (velocity rotation), i as rotating battlefield. **Rotation in general doesn't fit i.**
+Kept here so they don't get proposed again: φ (Fibonacci hit scaling), γ (harmonic screen-wide hits), √2 (branching splits), δ (stat reroll chaos), −1 (color inversion), ∞ (wrapping projectiles), old e (damage grows while unhit), old i (phantom waves; 4-fold attack copies), old 1 (merge into one big strike), golden angle (sunflower planting), 2 (binary split), ℵ₀ (re-fire on kill), ε (micro-hit dust), i as Quarter Turn (velocity rotation), i as rotating battlefield (**rotation in general doesn't fit i**), i as Interference (not chosen; Imaginary won).
 
 ---|---|
 | **Golden angle** (137.5°, from φ) | Attacks stop targeting. They're **planted** at golden-angle steps spiraling outward from you, filling the field like a sunflower head with lingering hits |
@@ -423,7 +440,7 @@ Every enemy is a **shape × color** combination. The shape decides how it behave
 
 ## 15. Open questions
 1. **4D:** decide at M5.
-2. **Constants:** *Interference* for i, or the backup *Imaginary hits* (first hit turns an enemy into a ghost and deals nothing, the second makes it real and deals both hits squared, since i·i = −1)? Beyond Euler's five, new Constants have to pass the bar in §6.
+2. **Constants:** should ghosts stay harmful (§6.5)? Beyond Euler's five, new Constants have to pass the bar in §6.
 3. **Backlog picks:** which ideas in §16.4 sound good, and which should go.
 
 ---
