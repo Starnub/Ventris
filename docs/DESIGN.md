@@ -241,14 +241,14 @@ Constants are **rare relics that change the way you play.** They aren't stat sti
 | **π** (Orbit) | The circle | Attacks don't fly outward. They **circle you** at your range radius. | Dots orbit / the beam sweeps a full circle like a lighthouse / pulse rings spin and linger / clones orbit you | Nothing beyond your radius gets hit |
 | **0** (Null) | Nothing | **You stop attacking.** Your shape grows and erases whatever touches it, scaling with Integrity. | Attack replaced by contact | No range at all |
 | **e** (Growth) | Exponential growth | Attacks **start tiny and grow exponentially** as they travel. Far enemies take huge hits, close ones take tiny hits. | The dot swells into an orb / the beam widens into a cone / the pulse gets *stronger* as it expands / the clone starts small and swells | Weak up close |
-| **i** (Quarter Turn) | Multiplying by i rotates by 90° | **Each hit multiplies the enemy's velocity by i.** One hit turns it sideways so it **circles you**. A second hit (i² = −1) **flings it outward**. A third turns it sideways the other way. A fourth (i⁴ = 1) points it **back at you**. | Every attack type applies one turn per hit, so multi-hit attacks (Clone, Dotted) spin enemies through several turns at once | Enemies pile up in rings around you instead of dying quickly, and every 4th hit sends one straight back |
+| **i** (Interference) *(proposed)* | Complex amplitudes are why waves interfere | **Your attacks become waves emitted from every vertex of your Form.** Where waves overlap they **interfere**: bright bands deal huge damage, dark bands deal none. The fringe pattern drifts as your shape turns. | Point: one source, so no interference / Line: two sources, the classic **double-slit** pattern / Polygon: n-fold kaleidoscope fringes / Polyhedron: complex 3D fringes projected onto the field | Enemies sitting in dark bands are untouchable until the pattern shifts |
 | **1** (Unity) | Identity: one whole | **All enemies in a wave share one health pool.** Damage to any of them hurts all of them. Thin lines link them into one constellation. | Area attacks hit the pool once per enemy touched, so AoE becomes king | Nobody dies until the whole wave does, so they all keep advancing |
 
 ### 6.3 Euler's Identity
-**e^(iπ) + 1 = 0** uses exactly these five. Collect all five and *Euler's Identity* unlocks the **second Constant slot**, and the equation fills in on screen as you go. With two slots, combinations happen naturally with no special effects needed: **π + i** has your orbiting attacks grinding through the enemies i turned into orbiters. **1 + i** turns a whole linked constellation into a slowly spinning ring. **e + π** gives orbits that grow as they circle.
+**e^(iπ) + 1 = 0** uses exactly these five. Collect all five and *Euler's Identity* unlocks the **second Constant slot**, and the equation fills in on screen as you go. With two slots, combinations happen naturally with no special effects needed: **1 + i** means a single enemy caught in a bright band damages the whole linked wave. **e + i** has waves growing as they spread, so the outer fringes hit hardest. **e + π** gives orbits that grow as they circle.
 
 ### 6.4 Rejected ideas
-Kept here so they don't get proposed again: φ (Fibonacci hit scaling), γ (harmonic screen-wide hits), √2 (branching splits), δ (stat reroll chaos), −1 (color inversion), ∞ (wrapping projectiles), old e (damage grows while unhit), old i (phantom waves; 4-fold attack copies), old 1 (merge into one big strike), golden angle (sunflower planting), 2 (binary split), ℵ₀ (re-fire on kill), ε (micro-hit dust).
+Kept here so they don't get proposed again: φ (Fibonacci hit scaling), γ (harmonic screen-wide hits), √2 (branching splits), δ (stat reroll chaos), −1 (color inversion), ∞ (wrapping projectiles), old e (damage grows while unhit), old i (phantom waves; 4-fold attack copies), old 1 (merge into one big strike), golden angle (sunflower planting), 2 (binary split), ℵ₀ (re-fire on kill), ε (micro-hit dust), i as Quarter Turn (velocity rotation), i as rotating battlefield. **Rotation in general doesn't fit i.**
 
 ---|---|
 | **Golden angle** (137.5°, from φ) | Attacks stop targeting. They're **planted** at golden-angle steps spiraling outward from you, filling the field like a sunflower head with lingering hits |
@@ -423,7 +423,7 @@ Every enemy is a **shape × color** combination. The shape decides how it behave
 
 ## 15. Open questions
 1. **4D:** decide at M5.
-2. **Constants:** does *Quarter Turn* work for i? Beyond Euler's five, new Constants have to pass the bar in §6.
+2. **Constants:** *Interference* for i, or the backup *Imaginary hits* (first hit turns an enemy into a ghost and deals nothing, the second makes it real and deals both hits squared, since i·i = −1)? Beyond Euler's five, new Constants have to pass the bar in §6.
 3. **Backlog picks:** which ideas in §16.4 sound good, and which should go.
 
 ---
