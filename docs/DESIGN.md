@@ -1,4 +1,4 @@
-# Ventris — Design Plan (draft 5)
+# Ventris — Design Plan (draft 6)
 
 > Working title. Idle tower defense where **you are the tower**, an abstract shape in a pitch-black void.
 > It levels up for good: no prestige, no resets, no upkeep. Every piece of gear you equip shows up on the shape.
@@ -226,6 +226,8 @@ These replace the usual physical/magic split.
 
 Constants are **rare relics that change the way you play.** They aren't stat sticks: each one rewrites a rule of combat in a way you can **see**, and it's tied to what the number actually means.
 
+**The bar:** a Constant has to change a *rule of the world* (how attacks move, how enemies move, what you are, how enemies relate to each other). If it can be described as "+X% under condition Y", it isn't a Constant.
+
 ### 6.1 Rules
 - **One equipped at a time.** A second slot is unlocked by *Euler's Identity* (§6.3).
 - **Where they come from:** each Constant has a home **Threshold boss**. The first kill guarantees it.
@@ -239,15 +241,16 @@ Constants are **rare relics that change the way you play.** They aren't stat sti
 | **π** (Orbit) | The circle | Attacks don't fly outward. They **circle you** at your range radius. | Dots orbit / the beam sweeps a full circle like a lighthouse / pulse rings spin and linger / clones orbit you | Nothing beyond your radius gets hit |
 | **0** (Null) | Nothing | **You stop attacking.** Your shape grows and erases whatever touches it, scaling with Integrity. | Attack replaced by contact | No range at all |
 | **e** (Growth) | Exponential growth | Attacks **start tiny and grow exponentially** as they travel. Far enemies take huge hits, close ones take tiny hits. | The dot swells into an orb / the beam widens into a cone / the pulse gets *stronger* as it expands / the clone starts small and swells | Weak up close |
-| **i** (Rotation) | A quarter turn in the complex plane | Every attack is **copied with 4-fold symmetry**: the original plus copies rotated 90°, 180°, 270° around you | 4 dots in a cross / laser becomes a + / pulse alternates rotated by 45° / 4 clones in a square around the target | Only one copy aims at the target; the rest go where they go |
+| **i** (Quarter Turn) | Multiplying by i rotates by 90° | **Each hit multiplies the enemy's velocity by i.** One hit turns it sideways so it **circles you**. A second hit (i² = −1) **flings it outward**. A third turns it sideways the other way. A fourth (i⁴ = 1) points it **back at you**. | Every attack type applies one turn per hit, so multi-hit attacks (Clone, Dotted) spin enemies through several turns at once | Enemies pile up in rings around you instead of dying quickly, and every 4th hit sends one straight back |
 | **1** (Unity) | Identity: one whole | **All enemies in a wave share one health pool.** Damage to any of them hurts all of them. Thin lines link them into one constellation. | Area attacks hit the pool once per enemy touched, so AoE becomes king | Nobody dies until the whole wave does, so they all keep advancing |
 
 ### 6.3 Euler's Identity
-**e^(iπ) + 1 = 0** uses exactly these five. Collect all five and *Euler's Identity* unlocks the **second Constant slot**, and the equation fills in on screen as you go. With two slots, combinations happen naturally with no special effects needed: π + i gives four orbiting streams, and e + π gives orbits that grow as they circle.
+**e^(iπ) + 1 = 0** uses exactly these five. Collect all five and *Euler's Identity* unlocks the **second Constant slot**, and the equation fills in on screen as you go. With two slots, combinations happen naturally with no special effects needed: **π + i** has your orbiting attacks grinding through the enemies i turned into orbiters. **1 + i** turns a whole linked constellation into a slowly spinning ring. **e + π** gives orbits that grow as they circle.
 
-### 6.4 More candidates (unconfirmed)
-| Constant | Idea |
-|---|---|
+### 6.4 Rejected ideas
+Kept here so they don't get proposed again: φ (Fibonacci hit scaling), γ (harmonic screen-wide hits), √2 (branching splits), δ (stat reroll chaos), −1 (color inversion), ∞ (wrapping projectiles), old e (damage grows while unhit), old i (phantom waves; 4-fold attack copies), old 1 (merge into one big strike), golden angle (sunflower planting), 2 (binary split), ℵ₀ (re-fire on kill), ε (micro-hit dust).
+
+---|---|
 | **Golden angle** (137.5°, from φ) | Attacks stop targeting. They're **planted** at golden-angle steps spiraling outward from you, filling the field like a sunflower head with lingering hits |
 | **2** (Binary) | You **split into two smaller copies** orbiting each other, like a binary star. Two attack sources, each with half the stats. |
 | **ℵ₀** (Countable infinity) | Every **kill re-fires your attack from the corpse**, so chain reactions run through dense waves |
@@ -420,7 +423,7 @@ Every enemy is a **shape × color** combination. The shape decides how it behave
 
 ## 15. Open questions
 1. **4D:** decide at M5.
-2. **Constants:** are the new e, i, and 1 right? Which candidates in §6.4 should stay?
+2. **Constants:** does *Quarter Turn* work for i? Beyond Euler's five, new Constants have to pass the bar in §6.
 3. **Backlog picks:** which ideas in §16.4 sound good, and which should go.
 
 ---
